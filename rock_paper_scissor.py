@@ -1,6 +1,8 @@
 import random
 
 #Winner logic
+num_of_rounds = input("Enter the number of rounds: ")
+
 def result(uMove, cMove):
     if (((uMove=="rock") & (cMove=="scissor")) | ((uMove=="paper") & (cMove=="rock")) | ((uMove=="scissor") & (cMove=="paper"))):
         return "User Wins!"
