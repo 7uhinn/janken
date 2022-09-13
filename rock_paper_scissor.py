@@ -15,36 +15,44 @@ while True:
         break
 
 #Winner logic
-def result(uMove, cMove):
+def result(uMove, cMove, computerScore, userScore, drawScore):
     if (((uMove == "rock") & (cMove == "scissor")) | ((uMove == "paper") & (cMove == "rock")) | ((uMove == "scissor") & (cMove == "paper"))):
-        return "User Wins!"
+        print("User Wins!")
+        userScore+=1
     elif (uMove == cMove):
-        return "It's a Draw!"
+        print("It's a Draw!")
+        drawScore+=1
     else:
-        return "Computer Wins!"
+        print("Computer Wins!")
+        computerScore+=1
+    return (userScore,drawScore,computerScore)
 
 #loop for number of rounds
 try:
-    while True:
-        for rounds in range(num_of_rounds):
-            print("\nPlaying Round "+str(rounds+1))
-            print("Press Ctrl+C to Exit")
-            #Computer move
-            moves = ["rock", "paper", "scissor"]
-            computer_move = random.choice(moves)
+    computerScore = 0
+    userScore = 0
+    drawScore = 0
+    for rounds in range(num_of_rounds):
+        print("\nPlaying Round "+str(rounds+1))
+        print("Press Ctrl+C to Exit")
+        #Computer move
+        moves = ["rock", "paper", "scissor"]
+        computer_move = random.choice(moves)
 
-            #User move
-            user_move = ""
-            while True:
-                user_move = input("\nMake your move (Rock/Paper/Scissor): ").lower()
-                if user_move in moves:
-                    break
-                else:
-                    print("Not a valid move")
+        #User move
+        user_move = ""
+        while True:
+            user_move = input("\nMake your move (Rock/Paper/Scissor): ").lower()
+            if user_move in moves:
+                break
+            else:
+                print("Not a valid move")
 
-            print("\nYou choose: "+user_move)
-            print("Computer choose: "+computer_move)
-            print("\nRound "+str(rounds+1)+": "+result(user_move,computer_move))
+        print("\nYou choose: "+user_move)
+        print("Computer choose: "+computer_move)
+        print("\nRound "+str(rounds+1)+" Result: ")
+        userScore,drawScore,computerScore = result(user_move,computer_move,computerScore, userScore, drawScore)
 except KeyboardInterrupt:
     pass
 
+print("\nSCORE\nPlayer: "+str(userScore)+"\nComputer: "+str(computerScore)+"\nDraws: "+str(drawScore))
